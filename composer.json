@@ -9,7 +9,7 @@
             "role": ""
         }
     ],
-    "repositories":      [
+    "repositories": [
         {
             "type": "composer",
             "url":  "https://packages.drupal.org/8"
@@ -19,22 +19,25 @@
             "url": "https://github.com/previousnext/drush_cmi_tools.git"
         }
     ],
-    "require":           {
-        "composer/installers":                           "^1.6",
-        "cweagans/composer-patches":                     "^1.6",
-        "drupal-composer/drupal-scaffold":               "^2.5",
+    "require": {
+        "php": ">=5.6",
+        "composer/installers": "^1.2",
+        "cweagans/composer-patches": "^1.6.5",
+        "drupal-composer/drupal-scaffold": "^2.5",
         "universityofadelaide/shepherd-drupal-scaffold": "~2.2",
-        "drupal/console":                                "^1.8.0",
-        "drupal/core":                                   "~8.6.1",
-        "drupal/drush-cmi-tools":                        "dev-8.x-2.x",
-        "drush/drush":                                   "^9.4.0",
-        "webflo/drupal-finder":                          "^1.1.0",
-        "webmozart/path-util":                           "^2.3"
+        "drupal/console": "^1.8.0",
+        "drupal/core": "^8.7.0",
+        "drupal/drush-cmi-tools": "dev-8.x-2.x",
+        "drush/drush": "^9.0.0",
+        "vlucas/phpdotenv": "^2.4",
+        "webflo/drupal-finder": "^1.0.0",
+        "webmozart/path-util": "^2.3",
+        "zaporylie/composer-drupal-optimizations": "^1.0"
     },
-    "require-dev":       {
-        "webflo/drupal-core-require-dev": "~8.6.1"
+    "require-dev": {
+        "webflo/drupal-core-require-dev": "^8.7.0"
     },
-    "conflict":          {
+    "conflict": {
         "drupal/drupal": "*"
     },
     "minimum-stability": "dev",
@@ -51,29 +54,23 @@
             "@shepherd-scaffold"
         ]
     },
-    "extra":             {
+    "extra": {
+        "composer-exit-on-patch-failure": true,
+        "patchLevel": {
+            "drupal/core": "-p2"
+        },
         "installer-paths": {
-            "web/core":                     [
-                "type:drupal-core"
-            ],
-            "web/libraries/{$name}":        [
-                "type:drupal-library"
-            ],
-            "web/modules/contrib/{$name}":  [
-                "type:drupal-module"
-            ],
-            "web/profiles/contrib/{$name}": [
-                "type:drupal-profile"
-            ],
-            "web/themes/contrib/{$name}":   [
-                "type:drupal-theme"
-            ],
-            "drush/contrib/{$name}":        [
-                "type:drupal-drush"
-            ]
+            "web/core": ["type:drupal-core"],
+            "web/libraries/{$name}": ["type:drupal-library"],
+            "web/modules/contrib/{$name}": ["type:drupal-module"],
+            "web/profiles/contrib/{$name}": ["type:drupal-profile"],
+            "web/themes/contrib/{$name}": ["type:drupal-theme"],
+            "drush/Commands/{$name}": ["type:drupal-drush"]
         },
         "drupal-scaffold": {
             "initial": {
+                ".editorconfig": "../.editorconfig",
+                ".gitattributes": "../.gitattributes",
                 "sites/default/default.services.yml": "sites/default/services.yml",
                 "sites/default/default.settings.php": "sites/default/settings.php"
             }
