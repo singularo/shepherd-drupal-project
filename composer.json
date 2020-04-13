@@ -1,79 +1,120 @@
 {
-    "name":              "universityofadelaide/shepherd-drupal-project",
-    "description":       "Project template for Shepherd Drupal 8 projects with composer.",
-    "type":              "project",
-    "license":           "GPL-2.0-or-later",
-    "authors":           [
-        {
-            "name": "",
-            "role": ""
-        }
-    ],
-    "repositories": [
-        {
-            "type": "composer",
-            "url":  "https://packages.drupal.org/8"
-        },
-        {
-            "type": "git",
-            "url": "https://github.com/previousnext/drush_cmi_tools.git"
-        }
-    ],
-    "require": {
-        "php": ">=5.6",
-        "composer/installers": "^1.2",
-        "cweagans/composer-patches": "^1.6.5",
-        "drupal-composer/drupal-scaffold": "^2.5",
-        "universityofadelaide/shepherd-drupal-scaffold": "~2.2",
-        "drupal/console": "^1.8.0",
-        "drupal/core": "^8.7.0",
-        "drupal/drush-cmi-tools": "dev-8.x-2.x",
-        "drush/drush": "^9.0.0",
-        "vlucas/phpdotenv": "^2.4",
-        "webflo/drupal-finder": "^1.0.0",
-        "webmozart/path-util": "^2.3",
-        "zaporylie/composer-drupal-optimizations": "^1.0"
-    },
-    "require-dev": {
-        "webflo/drupal-core-require-dev": "^8.7.0"
-    },
-    "conflict": {
-        "drupal/drupal": "*"
-    },
-    "minimum-stability": "dev",
-    "prefer-stable":     true,
-    "config":            {
-        "bin-dir":       "bin/",
-        "sort-packages": true
-    },
-    "scripts":           {
-        "drupal-scaffold":   "DrupalComposer\\DrupalScaffold\\Plugin::scaffold",
-        "shepherd-scaffold": "UniversityOfAdelaide\\ShepherdDrupalScaffold\\Plugin::scaffold",
-        "post-install-cmd":  [
-            "@drupal-scaffold",
-            "@shepherd-scaffold"
-        ]
-    },
-    "extra": {
-        "composer-exit-on-patch-failure": true,
-        "patchLevel": {
-            "drupal/core": "-p2"
-        },
-        "installer-paths": {
-            "web/core": ["type:drupal-core"],
-            "web/libraries/{$name}": ["type:drupal-library"],
-            "web/modules/contrib/{$name}": ["type:drupal-module"],
-            "web/profiles/contrib/{$name}": ["type:drupal-profile"],
-            "web/themes/contrib/{$name}": ["type:drupal-theme"],
-            "drush/Commands/{$name}": ["type:drupal-drush"]
-        },
-        "drupal-scaffold": {
-            "initial": {
-                ".editorconfig": "../.editorconfig",
-                ".gitattributes": "../.gitattributes",
-                "sites/default/default.services.yml": "sites/default/services.yml",
-                "sites/default/default.settings.php": "sites/default/settings.php"
-            }
-        }
+  "name": "singularo/shepherd-drupal-project",
+  "description": "Project template for Shepherd Drupal 8 projects with composer.",
+  "type": "project",
+  "license": "GPL-2.0-or-later",
+  "authors": [
+    {
+      "name": "Simon Lindsay",
+      "role": "Developer"
     }
+  ],
+  "repositories": [
+    {
+      "type": "composer",
+      "url": "https://packages.drupal.org/8"
+    },
+    {
+      "type": "git",
+      "url": "https://github.com/previousnext/drush_cmi_tools.git"
+    },
+    {
+      "type": "path",
+      "url": "~/projects/singularo/shepherd-drupal-scaffold"
+    }
+  ],
+  "require": {
+    "php": ">=7.2",
+    "ext-json": "*",
+    "ext-mbstring": "^7.2",
+    "ext-posix": "*",
+    "composer/installers": "^1.2",
+    "cweagans/composer-patches": "^1.6.5",
+    "drupal/admin_toolbar": "^2.0",
+    "drupal/console": "~1.0",
+    "drupal/core-composer-scaffold": "^8.8",
+    "drupal/core-recommended": "^8.8",
+    "drupal/drush_cmi_tools": "dev-8.x-2.x",
+    "drush/drush": "^9.0.0",
+    "oomphinc/composer-installers-extender": "^1.1",
+    "singularo/shepherd-drupal-scaffold": "dev-develop",
+    "vlucas/phpdotenv": "^2.4",
+    "webflo/drupal-finder": "^1.0.0",
+    "webmozart/path-util": "^2.3",
+    "zaporylie/composer-drupal-optimizations": "^1.0"
+  },
+  "require-dev": {
+    "dealerdirect/phpcodesniffer-composer-installer": "^0.5.0",
+    "phpstan/phpstan-deprecation-rules": "^0.11.0",
+    "roave/security-advisories": "dev-master",
+    "drupal/core-dev": "^8.8",
+    "weitzman/drupal-test-traits": "^1.2"
+  },
+  "conflict": {
+    "drupal/drupal": "*"
+  },
+  "minimum-stability": "dev",
+  "prefer-stable": true,
+  "config": {
+    "bin-dir": "bin/",
+    "sort-packages": true,
+    "platform": {
+      "php": "7.2"
+    }
+  },
+  "scripts": {
+    "drupal-scaffold": "DrupalComposer\\DrupalScaffold\\Plugin::scaffold",
+    "shepherd-scaffold": "UniversityOfAdelaide\\ShepherdDrupalScaffold\\Plugin::scaffold",
+    "post-drupal-scaffold-cmd": [
+      "@drupal-scaffold",
+      "@shepherd-scaffold"
+    ]
+  },
+  "extra": {
+    "composer-exit-on-patch-failure": true,
+    "drupal-scaffold": {
+      "allowed-packages": [
+        "singularo/shepherd-drupal-scaffold"
+      ],
+      "locations": {
+        "web-root": "web/"
+      }
+    },
+    "installer-paths": {
+      "web/core": [
+        "type:drupal-core"
+      ],
+      "web/libraries/{$name}": [
+        "type:drupal-library",
+        "type:bower-asset",
+        "type:npm-asset",
+        "harvesthq/chosen"
+      ],
+      "web/modules/contrib/{$name}": [
+        "type:drupal-module"
+      ],
+      "web/profiles/contrib/{$name}": [
+        "type:drupal-profile"
+      ],
+      "web/themes/contrib/{$name}": [
+        "type:drupal-theme"
+      ],
+      "drush/Commands/{$name}": [
+        "type:drupal-drush"
+      ]
+    },
+    "installer-types": [
+      "bower-asset",
+      "npm-asset",
+      "library"
+    ],
+    "overwrite": true,
+    "patchLevel": {
+      "drupal/core": "-p2"
+    },
+    "preserve-paths": [
+      "web/sites"
+    ],
+    "symlink": true
+  }
 }
