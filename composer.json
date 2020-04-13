@@ -8,7 +8,7 @@
   ],
   "repositories": [
     { "type": "composer", "url": "https://packages.drupal.org/8" },
-    { "type": "git", "url": "https://github.com/previousnext/drush_cmi_tools.git" },
+    { "type": "git", "url": "https://github.com/previousnext/drush_cmi_tools.git" }
   ],
   "require": {
     "php": ">=7.2",
