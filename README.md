@@ -20,7 +20,7 @@ for your setup.
 After that you can create the project:
 
 ```
-composer create-project singularo/shepherd-drupal-project:8.x-dev some-dir --no-interaction
+composer create-project singularo/shepherd-drupal-project some-dir --no-interaction
 ```
 
 With `composer require ...` you can download new dependencies to your
